@@ -1,13 +1,17 @@
+from math import prod
 from itertools import combinations
 
 
-if __name__ == '__main__':
-    with open('../data/input01.txt') as f:
-        lines = f.readlines()
+def day_1(filename, combo_length):
+    with open(filename) as f:
+        nums = [int(line.strip()) for line in f.readlines()]
 
-    nums = [int(line.strip()) for line in lines]
-    for combo in combinations(nums, 2):
+    for combo in combinations(nums, combo_length):
         if sum(combo) == 2020:
             break
 
-    print(combo[0]*combo[1])  # 3376512 is wrong
+    return prod(combo)
+
+
+if __name__ == '__main__':
+    print(day_1('../data/input01.txt', 2))
