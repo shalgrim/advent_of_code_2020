@@ -6,7 +6,7 @@ CONTAIN_PATTERN = re.compile(r'(?P<container>.+?) bags contain (?P<contained>.+)
 SUB_CONTAIN_PATTERN = re.compile(r'(?P<amount>\d+) (?P<bagtype>.+) bag.*')
 
 
-def main(filename):
+def create_dicts(filename):
     with open(filename) as f:
         rules = [line.strip() for line in f.readlines()]
 
@@ -24,7 +24,11 @@ def main(filename):
                 submatch = SUB_CONTAIN_PATTERN.search(ctd)
                 contain[container].append((int(submatch.group('amount')), submatch.group('bagtype')))
                 contained_by[submatch.group('bagtype')].append(container)
+    return contain, contained_by
 
+
+def main(filename):
+    contain, contained_by = create_dicts(filename)
     bag_types = set(contained_by['shiny gold'])
     new_size = len(bag_types)
     old_size = 0
