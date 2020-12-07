@@ -1,13 +1,18 @@
 import re
 from collections import defaultdict
 
-from day07_1 import CONTAIN_PATTERN, NO_CONTAIN_PATTERN, SUB_CONTAIN_PATTERN, create_dicts
+from day07_1 import (
+    CONTAIN_PATTERN,
+    NO_CONTAIN_PATTERN,
+    SUB_CONTAIN_PATTERN,
+    create_dicts,
+)
 
 
 def get_contained(amount, bag_type, contain):
     answer = []
     for t in contain[bag_type]:
-        this_amount = amount*t[0]
+        this_amount = amount * t[0]
         this_bag_type = t[1]
         answer.append((this_amount, this_bag_type))
         answer += get_contained(this_amount, this_bag_type, contain)
