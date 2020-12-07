@@ -1,12 +1,7 @@
 import re
 from collections import defaultdict
 
-from day07_1 import (
-    CONTAIN_PATTERN,
-    NO_CONTAIN_PATTERN,
-    SUB_CONTAIN_PATTERN,
-    create_dicts,
-)
+from day07_1 import create_dicts
 
 
 def get_contained(amount, bag_type, contain):
