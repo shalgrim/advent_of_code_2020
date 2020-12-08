@@ -19,6 +19,7 @@ def run_until_second_execution(instructions):
     while instruction_pointer not in EXECUTED:
         EXECUTED.add(instruction_pointer)
         instruction_pointer += execute_instruction(*instructions[instruction_pointer])
+        print(instruction_pointer)
 
 
 if __name__ == '__main__':
