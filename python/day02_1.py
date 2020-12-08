@@ -1,21 +1,30 @@
 import re
 
+from file_ops import readlines
 
-PATTERN = re.compile(r'(?P<lo>\d+)-(?P<hi>\d+)\s+(?P<letter>[a-z]):\s+(?P<password>\S+)')
+LO = 'lo'
+HI = 'hi'
+LETTER = 'letter'
+PWD = 'pwd'
+PATTERN = re.compile(
+    rf'(?P<{LO}>\d+)-(?P<{HI}>\d+)\s+(?P<{LETTER}>[a-z]):\s+(?P<{PWD}>\S+)'
+)
 
 
-def is_valid(group):
-    lo = int(group[0])
-    hi = int(group[1])
-    char = group[2]
-    password = group[3]
+def is_valid(groupdict):
+    lo = int(groupdict[LO])
+    hi = int(groupdict[HI])
+    letter = groupdict[LETTER]
+    password = groupdict[PWD]
 
-    return lo <= password.count(char) <= hi
+    return lo <= password.count(letter) <= hi
+
+
+def count_valid(lines, is_valid_algorithm):
+    groups = [PATTERN.match(line).groupdict() for line in lines]
+    return sum(is_valid_algorithm(group) for group in groups)
 
 
 if __name__ == '__main__':
-    with open('../data/input02.txt') as f:
-        lines = f.readlines()
-
-    groups = [PATTERN.match(line).groups() for line in lines]
-    print(sum(is_valid(group) for group in groups))
+    lines = readlines(2)
+    count_valid(lines, is_valid)

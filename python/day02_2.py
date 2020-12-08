@@ -1,18 +1,16 @@
-from day02_1 import PATTERN
+from day02_1 import HI, LETTER, LO, PWD, count_valid
+from file_ops import readlines
 
 
-def is_valid(group):
-    first = int(group[0]) - 1
-    second = int(group[1]) - 1
-    char = group[2]
-    password = group[3]
+def is_valid(groupdict):
+    first = int(groupdict[LO]) - 1
+    second = int(groupdict[HI]) - 1
+    letter = groupdict[LETTER]
+    password = groupdict[PWD]
 
-    return (password[first] == char) != (password[second] == char)
+    return (password[first] == letter) != (password[second] == letter)
 
 
 if __name__ == '__main__':
-    with open('../data/input02.txt') as f:
-        lines = f.readlines()
-
-    groups = [PATTERN.match(line).groups() for line in lines]
-    print(sum(is_valid(group) for group in groups))
+    lines = readlines(2)
+    print(count_valid(lines, is_valid))
