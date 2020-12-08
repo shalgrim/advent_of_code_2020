@@ -27,4 +27,4 @@ def count_valid(lines, is_valid_algorithm):
 
 if __name__ == '__main__':
     lines = readlines(2)
-    count_valid(lines, is_valid)
+    print(count_valid(lines, is_valid))
