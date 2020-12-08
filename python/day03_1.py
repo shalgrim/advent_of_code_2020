@@ -21,7 +21,7 @@ def count_trees(right, down, lines):
 
 if __name__ == '__main__':
     with open(f'../data/input03.txt') as f:
-        lines = [line.strip()  for line in f.readlines()]
+        lines = [line.strip() for line in f.readlines()]
 
     right = 3
     down = 1

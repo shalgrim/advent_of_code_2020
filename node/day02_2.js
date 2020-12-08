@@ -11,19 +11,11 @@ function isValid(line) {
     }
 
     const password = line.split(':')[1].trim();
-    const lo = parseInt(line.split('-')[0]);
-    const hi = parseInt(line.split('-')[1].split(' ')[0]);
+    const first = parseInt(line.split('-')[0]) - 1;
+    const second = parseInt(line.split('-')[1].split(' ')[0]) - 1;
     const char = line.split(':')[0].split(' ')[1];
 
-    let count = 0;
-
-    for (c of password) {
-        if (c === char) {
-            count++;
-        }
-    }
-
-    if (count >= lo && count <= hi) {
+    if ((password[first] === char) !== (password[second] === char)) {
         valid.push(1);
     }
 }
