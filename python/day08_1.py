@@ -1,4 +1,5 @@
 from file_ops import readlines
+
 ACCUMULATOR = 0
 EXECUTED = set()
 

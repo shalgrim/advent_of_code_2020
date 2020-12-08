@@ -33,9 +33,9 @@ if __name__ == '__main__':
     split_lines = [line.split() for line in lines]
     for i, line in enumerate(split_lines):
         if line[0] == 'nop':
-            instructions = split_lines[:i] + [['jmp', line[1]]] + split_lines[i+1:]
+            instructions = split_lines[:i] + [['jmp', line[1]]] + split_lines[i + 1 :]
         elif line[0] == 'jmp':
-            instructions = split_lines[:i] + [['nop', line[1]]] + split_lines[i + 1:]
+            instructions = split_lines[:i] + [['nop', line[1]]] + split_lines[i + 1 :]
         else:
             instructions = split_lines
         if run_until_exhaustion_or_repeat(instructions):
