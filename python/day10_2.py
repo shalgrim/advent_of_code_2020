@@ -1,20 +1,23 @@
+from functools import lru_cache
+
 from file_ops import readlines
 
 
-def count_arrangements(nums, start=0, target=None):
-    if target is None:
-        target = max(nums)
+def count_arrangements(nums):
+    @lru_cache
+    def helper(start, target):
 
-    answer = 0
-    potentials = [n for n in nums if 1 <= n-start <= 3]
+        answer = 0
+        potentials = [n for n in nums if 1 <= n-start <= 3]
 
-    for potential in potentials:
-        if potential == target:
-            answer += 1
-        else:
-            answer += count_arrangements(nums, potential, target)
+        for potential in potentials:
+            if potential == target:
+                answer += 1
+            else:
+                answer += helper(potential, target)
 
-    return answer
+        return answer
+    return helper(0, max(nums))
 
 
 if __name__ == '__main__':
