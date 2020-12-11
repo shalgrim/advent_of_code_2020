@@ -1,10 +1,11 @@
 from unittest import TestCase
 from day11_1 import main
+from day11_2 import main as main2
 
 
 class TestDay11(TestCase):
-    def test_part1(self):
-        lines = [
+    def setUp(self):
+        self.lines = [
             'L.LL.LL.LL',
             'LLLLLLL.LL',
             'L.L.L..L..',
@@ -16,4 +17,9 @@ class TestDay11(TestCase):
             'L.LLLLLL.L',
             'L.LLLLL.LL',
         ]
-        self.assertEqual(37, main(lines))
+    def test_part1(self):
+        self.assertEqual(37, main(self.lines))
+
+    def test_part2(self):
+        self.assertEqual(26, main2(self.lines))
+
