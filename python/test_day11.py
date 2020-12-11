@@ -1,0 +1,19 @@
+from unittest import TestCase
+from day11_1 import main
+
+
+class TestDay11(TestCase):
+    def test_part1(self):
+        lines = [
+            'L.LL.LL.LL',
+            'LLLLLLL.LL',
+            'L.L.L..L..',
+            'LLLL.LL.LL',
+            'L.LL.LL.LL',
+            'L.LLLLL.LL',
+            '..L.L.....',
+            'LLLLLLLLLL',
+            'L.LLLLLL.L',
+            'L.LLLLL.LL',
+        ]
+        self.assertEqual(37, main(lines))
