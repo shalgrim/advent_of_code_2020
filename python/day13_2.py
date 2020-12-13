@@ -22,14 +22,14 @@ def main(line):
         -1
     ]
 
-    t = minutes_past_for_highest_bus
-    t = minutes_past_for_lowest_bus
+    t = highest_bus - minutes_past_for_highest_bus
+    # t = minutes_past_for_lowest_bus
 
     while True:
-        if all(does_work(*tup, t) for tup in minutes_past_t if tup[1] != lowest_bus):
+        if all(does_work(*tup, t) for tup in minutes_past_t if tup[1] != highest_bus):
             break
-        # t += highest_bus
-        t += lowest_bus
+        t += highest_bus
+        # t += lowest_bus
         print(t)
     return t
 
