@@ -1,4 +1,6 @@
 from day13_1 import LINE_TWO
+import math
+import datetime
 
 
 def does_work(minutes_past, bus, t):
@@ -24,13 +26,21 @@ def main(line):
 
     t = highest_bus - minutes_past_for_highest_bus
     # t = minutes_past_for_lowest_bus
+    log_len = 0
+    start = datetime.datetime.now()
 
     while True:
         if all(does_work(*tup, t) for tup in minutes_past_t if tup[1] != highest_bus):
             break
         t += highest_bus
         # t += lowest_bus
-        print(t)
+        # print(t)
+
+        if int(math.log10(t)) > log_len:
+            td = datetime.datetime.now() - start
+            log_len = int(math.log10(t))
+            print(math.log10(t), t, td.seconds)
+
     return t
 
 
