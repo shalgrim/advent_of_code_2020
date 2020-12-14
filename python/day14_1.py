@@ -24,5 +24,5 @@ def main(lines):
 
 
 if __name__ == '__main__':
-    lines = readlines(15)
+    lines = readlines(14)
     print(main(lines))
