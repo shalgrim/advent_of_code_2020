@@ -10,6 +10,8 @@ def play_game(starting_numbers, turns):
 
     while turn < turns:
         turn += 1
+        if turn % 1_000_000 == 0:
+            print(turn)
 
         if len(memory[number]) > 1:
             number = memory[number][-1] - memory[number][-2]

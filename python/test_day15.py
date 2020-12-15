@@ -13,3 +13,4 @@ class TestDay15(TestCase):
         self.assertEqual(4, play_game([0, 3, 6], 9))
         self.assertEqual(0, play_game([0, 3, 6], 10))
         self.assertEqual(436, play_game([0, 3, 6], 2020))
+        self.assertEqual(175594, play_game([0, 3, 6], 30_000_000))
