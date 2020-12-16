@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from day16_1 import main, get_invalid_values, is_invalid
+from day16_2 import is_valid_ticket, get_ordered_field_names
 
 
 class TestDay16(TestCase):
@@ -31,3 +32,19 @@ class TestDay16(TestCase):
 
     def test_part1(self):
         self.assertEqual(71, main('\n'.join(self.lines)))
+
+    def test_is_valid_ticket(self):
+        self.assertTrue(is_valid_ticket([7, 1, 14], self.rules))
+        self.assertFalse(is_valid_ticket([40, 4, 50], self.rules))
+        self.assertFalse(is_valid_ticket([55, 2, 20], self.rules))
+        self.assertFalse(is_valid_ticket([38, 6, 12], self.rules))
+
+    def test_get_ordered_field_names(self):
+        self.assertEqual(
+            ['row', 'class', 'seat'],
+            get_ordered_field_names(
+                "class: 0-1 or 4-19\nrow: 0-5 or 8-19\nseat: 0-13 or 16-19\n\n"
+                "your ticket:\n11,12,13\n\n"
+                "nearby tickets:\n3,9,18\n15,1,5\n5,14,9"
+            ),
+        )

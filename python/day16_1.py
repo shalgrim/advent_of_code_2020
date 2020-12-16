@@ -1,6 +1,10 @@
 from file_ops import read
 
 
+def parse_field_names(lines):
+    return [line.split(':')[0] for line in lines]
+
+
 def parse_rules(lines):
     rules = []
     for line in lines:
@@ -15,7 +19,6 @@ def parse_rules(lines):
 
 
 def parse_ticket(line):
-    print(f'{line=}')
     return [int(v) for v in line.split(',')]
 
 
@@ -32,15 +35,21 @@ def get_invalid_values(ticket, rules):
 
 
 def main(text):
-    rules, my_ticket, other_tickets = text.split('\n\n')
-    rules = parse_rules(rules.split('\n'))
-    my_ticket = parse_ticket(my_ticket.split('\n')[1])
-    other_tickets = [parse_ticket(line) for line in other_tickets.strip().split('\n')[1:]]
+    _, rules, my_ticket, other_tickets = parse_text(text)
     invalid_values = []
     for ot in other_tickets:
         invalid_values += get_invalid_values(ot, rules)
 
     return sum(invalid_values)
+
+
+def parse_text(text):
+    rules, my_ticket, other_tickets = text.split('\n\n')
+    field_names = [line.split(':')[0] for line in rules.split('\n')]
+    rules = parse_rules(rules.split('\n'))
+    my_ticket = parse_ticket(my_ticket.split('\n')[1])
+    other_tickets = [parse_ticket(line) for line in other_tickets.strip().split('\n')[1:]]
+    return field_names, rules, my_ticket, other_tickets
 
 
 if __name__ == '__main__':
