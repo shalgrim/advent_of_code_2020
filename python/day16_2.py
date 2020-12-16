@@ -70,4 +70,4 @@ def main(txt):
 
 
 if __name__ == '__main__':
-    print(main(read(16)))  # 177408 is too low
+    print(main(read(16)))
