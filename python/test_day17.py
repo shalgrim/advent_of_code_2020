@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from day17_1 import count_active_cubes, active_cubes_from_lines, get_active_cubes
+from day17_2 import count_active_cubes_4d, active_cubes_from_lines_4d
 
 
 class TestDay17(TestCase):
@@ -35,3 +36,7 @@ class TestDay17(TestCase):
         active_cubes = active_cubes_from_lines(lines)
         self.assertEqual(112, count_active_cubes(active_cubes, 6))
 
+    def test_part2(self):
+        lines = ['.#.', '..#', '###']
+        active_cubes = active_cubes_from_lines_4d(lines)
+        self.assertEqual(848, count_active_cubes_4d(active_cubes, 6))
