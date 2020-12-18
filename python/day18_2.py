@@ -24,6 +24,11 @@ def evaluate(problem):
                     left = stack.pop()
                     left = calculate(left, operator, right)
                 stack.pop()
+                while stack and stack[-1] == '+':
+                    right = left
+                    operator = stack.pop()
+                    left = stack.pop()
+                    left = calculate(left, operator, right)
             else:
                 operator = item
         else:
@@ -46,4 +51,4 @@ def evaluate(problem):
 if __name__ == '__main__':
     lines = readlines(18)
     values = [evaluate(line) for line in lines]
-    print(sum(values))  # 1283817319602067 is too high and 110521173116642 is wrong
+    print(sum(values))
