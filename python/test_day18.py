@@ -24,4 +24,7 @@ class TestDay18(TestCase):
         self.assertEqual(1445, evaluate2('5 + (8 * 3 + 9 + 3 * 4 * 3)'))
         self.assertEqual(669060, evaluate2('5 * 9 * (7 * 3 * 3 + 9 * 3 + (8 + 6 * 4))'))
         self.assertEqual(23340, evaluate2('((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2'))
-        self.assertEqual(4012416, evaluate2('9 * 6 * 3 * 8 * ((8 * 4 * 2 * 6) + 3 * 8)'))
+        self.assertEqual(9, evaluate2('2 + 3 + 4'))  # line 12
+        self.assertEqual(32, evaluate2('8 * 4'))  # line 13
+        self.assertEqual(4012416, evaluate2('9 * 6 * 3 * 8 * ((8 * 4 * 2 * 6) + 3 * 8)'))  # line 21
+        self.assertEqual(1539972, evaluate2('6 * (3 * 2 + 3 + (6 + 3 + 7 * 4 + 2 * 7)) + 6 * 9 + 9 * 7'))  # line 370
