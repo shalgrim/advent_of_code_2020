@@ -1,6 +1,7 @@
 import math
 from collections import defaultdict
 from copy import deepcopy, copy
+from datetime import datetime
 from enum import Enum, auto
 from itertools import chain
 
@@ -272,10 +273,9 @@ class Square:
 
 
 def main(txt):
-    tiles = text_to_tiles(txt)
-    square_size = int(math.sqrt(len(tiles)))
-    square = Square(square_size, tiles)
-    square.solve()
+    print(datetime.now())
+    square = build_solved_square(txt)
+    print(datetime.now())  # it only takes 32 seconds
     corners = [
         square.placed_tiles[0][0].number,
         square.placed_tiles[0][-1].number,
@@ -284,6 +284,14 @@ def main(txt):
     ]
 
     return math.prod(corners)
+
+
+def build_solved_square(txt):
+    tiles = text_to_tiles(txt)
+    square_size = int(math.sqrt(len(tiles)))
+    square = Square(square_size, tiles)
+    square.solve()
+    return square
 
 
 if __name__ == '__main__':
