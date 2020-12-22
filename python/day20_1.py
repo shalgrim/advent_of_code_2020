@@ -177,7 +177,7 @@ class ArrangedTile():
 
     @property
     def image_lines(self):
-        return [line[1:-1] for line in self.arranged_lines]
+        return [line[1:-1] for line in self.arranged_lines[1:-1]]
 
     @property
     def top(self):

@@ -1,8 +1,7 @@
 from unittest import TestCase
 
-from file_ops import read
-from day20_1 import main
-from day20_2 import main as main2
+from day20_1 import main, build_solved_square
+from day20_2 import main as main2, count_sea_monsters
 
 
 class TestDay20(TestCase):
@@ -22,6 +21,17 @@ class TestDay20(TestCase):
         3079 FLIPPED270 2473 ROT180 1171 ROT270
         """
         self.assertEqual(20899048083289, main(self.txt))
+
+    def test_to_image(self):
+        square = build_solved_square(self.txt)
+        image = square.to_image()
+        self.assertEqual(24, len(image))
+        self.assertTrue(all(len(row) == 24 for row in image))
+
+    def test_count_sea_monsters(self):
+        square = build_solved_square(self.txt)
+        image = square.to_image()
+        self.assertEqual(2, count_sea_monsters(image))
 
     def test_part2(self):
         self.assertEqual(273, main2(self.txt))
