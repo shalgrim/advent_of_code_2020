@@ -142,6 +142,44 @@ class ArrangedTile():
         return f'{self.number} {self.arrangement}'
 
     @property
+    def arranged_lines(self):
+        if self.arrangement == Arrangement.NORMAL:
+            return self.lines
+        elif self.arrangement == Arrangement.ROT90:
+            new_lines = []
+            for i in range(len(self.lines)):
+                new_lines.append(''.join([line[i] for line in self.lines[::-1]]))
+            return new_lines
+        elif self.arrangement == Arrangement.ROT180:
+            new_lines = []
+            for line in self.lines[::-1]:
+                new_lines.append(line[::-1])
+            return new_lines
+        elif self.arrangement == Arrangement.ROT270:
+            new_lines = []
+            for i in range(len(self.lines)-1, -1, -1):
+                new_lines.append(''.join([line[i] for line in self.lines]))
+            return new_lines
+        elif self.arrangement == Arrangement.FLIPPED:
+            return [line[::-1] for line in self.lines]
+        elif self.arrangement == Arrangement.FLIPPED90:
+            new_lines = []
+            for i in range(len(self.lines)-1, -1, -1):
+                new_lines.append(''.join(line[i] for line in self.lines[::-1]))
+            return new_lines
+        elif self.arrangement == Arrangement.FLIPPED180:
+            return self.lines[::-1]
+        elif self.arrangement == Arrangement.FLIPPED270:
+            new_lines = []
+            for i in range(len(self.lines)):
+                new_lines.append(''.join([line[i] for line in self.lines]))
+            return new_lines
+
+    @property
+    def image_lines(self):
+        return [line[1:-1] for line in self.arranged_lines]
+
+    @property
     def top(self):
         if self.arrangement == Arrangement.NORMAL:
             return list(self.lines[0])
@@ -271,11 +309,29 @@ class Square:
     def clear(self, x, y):
         self.placed_tiles[y][x] = None
 
+    def to_image(self):
+        lines = []
+        for row in self.placed_tiles:
+            as_lines = [tile.image_lines for tile in row]
+            for i in range(len(as_lines[0])):
+                lines.append(''.join([tile[i] for tile in as_lines]))
+        return lines
+
+    def to_lines(self):
+        """I don't think I want this"""
+        lines = []
+        for row in self.placed_tiles:
+            as_lines = [tile.arranged_lines for tile in row]
+            for i in range(len(as_lines[0])):
+                lines.append(''.join([tile[i] for tile in row]))
+        return lines
+
 
 def main(txt):
     print(datetime.now())
     square = build_solved_square(txt)
     print(datetime.now())  # it only takes 32 seconds
+    print(square)
     corners = [
         square.placed_tiles[0][0].number,
         square.placed_tiles[0][-1].number,
