@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 
-from day22_1 import decks_from_file, play_game, score_deck
+from day22_1 import decks_from_file, play_game, score_deck, main
 
 
 class TestDay22(TestCase):
@@ -18,3 +18,4 @@ class TestDay22(TestCase):
         deck1, deck2 = play_game(deck1, deck2)
         self.assertEqual([], deck1)
         self.assertEqual([3, 2, 10, 6, 8, 5, 9, 4, 7, 1], deck2)
+        self.assertEqual(35370, main())
