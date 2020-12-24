@@ -24,6 +24,7 @@ class TestDay22(TestCase):
 
     def test_part2(self):
         deck1, deck2 = decks_from_file('../data/test22.txt')
-        deck1, deck2 = play_recursive_game(deck1, deck2)
-        self.assertEqual([], deck1)
-        self.assertEqual([7, 5, 6, 2, 4, 1, 10, 8, 9, 3], deck2)
+        winner, winning_deck = play_recursive_game(deck1, deck2)
+        self.assertEqual(2, winner)
+        self.assertEqual([7, 5, 6, 2, 4, 1, 10, 8, 9, 3], winning_deck)
+        self.assertEqual(291, score_deck(winning_deck))
