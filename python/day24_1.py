@@ -144,14 +144,22 @@ def traverse(line, x, y, z):
     return traverse(remainder, *coordinate)
 
 
+def count_black(tiles):
+    return sum([1 for tile in tiles.values() if tile == 'black'])
+
+
 def main(lines):
+    tiles = get_part1_tiles(lines)
+    return count_black(tiles)
+
+
+def get_part1_tiles(lines):
     tiles = defaultdict(lambda: 'white')
     # tiles[(0, 0, 0)] = 'white'
     for line in lines:
         coordinates = traverse(line, 0, 0, 0)
         tiles[coordinates] = 'black' if tiles[coordinates] == 'white' else 'white'
-
-    return sum([1 for tile in tiles.values() if tile == 'black'])
+    return tiles
 
 
 if __name__ == '__main__':
