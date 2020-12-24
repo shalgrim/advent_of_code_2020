@@ -20,3 +20,4 @@ class TestDay23(TestCase):
     def test_part1(self):
         self.assertEqual('92658374', main('389125467', 10))
         self.assertEqual('67384529', main('389125467', 100))
+        self.assertEqual('97624853', main('853192647', 100))
