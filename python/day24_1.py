@@ -1,10 +1,20 @@
+from collections import defaultdict
+
+
 ALL_TILES = []
 
 
 class Tile:
     def __init__(self):
         self.color = 'white'
-        self.directions = {'e': None, 'se': None, 'sw': None, 'w': None, 'nw': None, 'ne': None}
+        self.directions = {
+            'e': None,
+            'se': None,
+            'sw': None,
+            'w': None,
+            'nw': None,
+            'ne': None,
+        }
         ALL_TILES.append(self)
 
     def set_from_direction(self, direction, tile):
@@ -104,13 +114,44 @@ class Tile:
         self.color = 'black' if self.color == 'white' else 'white'
 
 
-def main(lines):
-    reference_tile = Tile()
-    for line in lines:
-        tile_to_flip = reference_tile.traverse(line)
-        tile_to_flip.flip()
+def move(direction, x, y, z):
+    if direction == 'e':
+        return x + 1, y - 1, z
+    elif direction == 'w':
+        return x - 1, y + 1, z
+    elif direction == 'se':
+        return x, y - 1, z + 1
+    elif direction == 'nw':
+        return x, y + 1, z - 1
+    elif direction == 'ne':
+        return x + 1, y, z - 1
+    elif direction == 'sw':
+        return x - 1, y, z + 1
 
-    return sum([1 for tile in ALL_TILES if tile.color == 'black'])
+
+def traverse(line, x, y, z):
+    if len(line) == 0:
+        return x, y, z
+
+    if line[0] in ['e', 'w']:
+        direction = line[0]
+        remainder = line[1:]
+    else:
+        direction = line[:2]
+        remainder = line[2:]
+
+    coordinate = move(direction, x, y, z)
+    return traverse(remainder, *coordinate)
+
+
+def main(lines):
+    tiles = defaultdict(lambda: 'white')
+    # tiles[(0, 0, 0)] = 'white'
+    for line in lines:
+        coordinates = traverse(line, 0, 0, 0)
+        tiles[coordinates] = 'black' if tiles[coordinates] == 'white' else 'white'
+
+    return sum([1 for tile in tiles.values() if tile == 'black'])
 
 
 if __name__ == '__main__':
