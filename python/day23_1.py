@@ -1,4 +1,5 @@
 from copy import copy
+from datetime import datetime
 
 
 def convert_cups_to_answer(cups):
@@ -10,7 +11,8 @@ def play_game(cups, moves):
     current_cup_index = 0
     new_cups = copy(cups)
     for turn in range(moves):
-        print(f'-- move {turn+1} --')
+        if turn % 1000 == 0:
+            print(f'-- move {turn+1} --; {datetime.now()}')
         new_cups, current_cup_index = move(new_cups, current_cup_index)
 
     return new_cups
@@ -33,7 +35,7 @@ def print_picked_up_string(picked_up):
 
 
 def move(cups, current_cup_index):
-    print_cup_string(cups, current_cup_index)
+    # print_cup_string(cups, current_cup_index)
     current_cup = cups[current_cup_index]
 
     # Part 1
@@ -44,7 +46,7 @@ def move(cups, current_cup_index):
     ]
     pick_up_indexes = [pui % len(cups) for pui in pick_up_indexes]
     picked_up = [cups[pui] for pui in pick_up_indexes]
-    print_picked_up_string(picked_up)
+    # print_picked_up_string(picked_up)
     new_circle = copy(cups)
     for pu in picked_up:
         new_circle.remove(pu)
@@ -57,7 +59,7 @@ def move(cups, current_cup_index):
     if destination_cup <= 0:
         destination_cup = max(new_circle)
 
-    print(f'destination: {destination_cup}\n')
+    # print(f'destination: {destination_cup}\n')
 
     destination_cup_index = new_circle.index(destination_cup)
 

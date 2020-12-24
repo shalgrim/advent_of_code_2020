@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from day23_1 import convert_cups_to_answer, main, play_game
+from day23_2 import main as main2
 
 
 class TestDay23(TestCase):
@@ -21,3 +22,6 @@ class TestDay23(TestCase):
         self.assertEqual('92658374', main('389125467', 10))
         self.assertEqual('67384529', main('389125467', 100))
         self.assertEqual('97624853', main('853192647', 100))
+
+    def test_part2(self):
+        self.assertEqual(149245887792, main2('389125467', 10_000_000))
